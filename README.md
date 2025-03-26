@@ -3,29 +3,29 @@
 # 🏀 NBA Game Day Notifications System
 
 ## **Why I Built This**
-As a die-hard NBA fan who's tired of missing crucial game moments, I created this real-time notification system to keep me and fellow basketball enthusiasts in the loop. This project combines my passion for sports with cloud architecture to deliver something I actually use every game day.
+This isn't just another tech project—it's a love letter to the game, combining my passion for sports with some pretty clever cloud architecture. By leveraging AWS services like SNS, Lambda, and EventBridge, along with NBA APIs, I created an alert system that sends game scores and updates directly to subscribers. And because I'm all about efficiency, I used Terraform to make deploying and tearing down the entire solution as quick as a fast break.
 
 ---
 
 ## **What This System Does**
 - 📊 Pulls live NBA scores from a professional sports data API
-- 📱 Delivers instant game updates via text/email (no more checking your phone every 5 minutes!)
+- 📱 Delivers instant game updates via text/email 
 - ⏱️ Runs on a schedule so you never miss a crucial 4th quarter comeback
-- 🔒 Built with security-first mindset (because nobody likes their data exposed)
-- ☁️ Deploys in seconds with Terraform (because life's too short for manual setup)
+- 🔒 Built with security-first mindset 
+- ☁️ Deploys in seconds with Terraform
 
 ## **Before You Start**
-- Free API key from [sportsdata.io](https://sportsdata.io/) (takes 2 minutes to register)
-- Your own AWS account (the free tier should cover most usage unless you're texting the entire neighborhood)
+- Free API key from [sportsdata.io](https://sportsdata.io/) 
+- Your own AWS account 
 - AWS CLI configured to your account
-- Terraform v1.10.5+ installed (it's worth learning - trust me!)
+- Terraform v1.10.5+ installed 
 
 ---
 
 ## **How It All Works**
 ![NBA Score Pipeline Architecture](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
 
-*Simple but effective: Lambda grabs the data, formats it nicely, and SNS makes sure it reaches your phone/inbox right away*
+*EventBridge kicks things off by tracking NBA game schedules, Lambda grabs the data, formats it nicely, and SNS makes sure it reaches your phone/inbox right away*
 
 ---
 
@@ -43,77 +43,87 @@ As a die-hard NBA fan who's tired of missing crucial game moments, I created thi
 game-day-notifications_terraform/
 ├── nba_notifications.py         # Where the magic happens
 ├── nba_notifications.zip        # Same magic, but zipped for Lambda
-├── game_day_notifications.tf    # Infrastructure as code (never manually create resources again!)
+├── game_day_notifications.tf    # Infrastructure as code
 ├── LICENSE                     
 ├── .gitignore
-└── README.md                    # You're reading it now 👀               # Project documentation
+└── README.md                    # You're reading it now 👀  
 ``` 
 
 ## **Setup Instructions**
 
-### **Clone the Repository**
+
+### **First Things First: Grab the Code**
 ```bash
-git clone https://github.com/ifeanyiro9/game-day-notifications.git
-cd game-day-notifications
+git clone https://github.com/developedbydmac/game-day-notifications_terraform.git
+cd game-day-notifications_terraform
 ```
 
-### **Store API Key as secret in Parameter store**
-1. Run this aws cli command with your api key to store it in Paremeter store
+### **Secure Your API Key**
+Protect that precious NBA API key by storing it safely in AWS Parameter Store:
 ```bash
 aws ssm put-parameter --name "nba-api-key" --value "<API_KEY>" --type "SecureString"
 ```
 
-### **Run Terraform commands**
-1. Initialize Terraform directory, provider plugins and set up local backend
+### **Terraform Magic: Making Infrastructure Dance**
+Let's get your infrastructure rolling with these essential Terraform commands:
+
+1. **Initialize Everything**
 ```bash
 terraform init
 ```
-2. Format Terraform config files to make it clean, readable, and follow best practices.
+This sets up all the necessary plugins and gets your project ready to roll.
+
+2. **Keep It Clean**
 ```bash
 terraform fmt
 ```
-3. Check Terraform configuration for syntax errors and correctness
+A quick formatting pass to make sure your code looks sharp and follows best practices.
+
+3. **Double-Check Your Work**
 ```bash
 terraform validate
 ```
-4. Show preview of changes Terraform will make to your infrastructure before applying them
+Catches any sneaky syntax errors before they cause trouble.
+
+4. **Preview the Changes**
 ```bash
 terraform plan
 ```
-5. Create or update the infrastructure based on the Terraform configuration.
+See exactly what's about to happen to your infrastructure - no surprises!
+
+5. **Bring It to Life**
 ```bash
 terraform apply
 ```
-6. Remove all resources defined in your Terraform configuration.
+Watch your cloud infrastructure come to life with just one command.
+
+6. **Clean Up Time**
 ```bash
-terraform destory
+terraform destroy
 ```
+When you're done playing, sweep away everything you've created.
 
-### **Add Subscriptions to the SNS Topic**
-1. After creating the topic, head on the SNS topic name.
-2. Navigate to the Subscriptions tab and click Create subscription.
-3. Select a Protocol:
-- For Email:
-  - Choose Email.
-  - Enter a valid email address.
-- For SMS (phone number):
-  - Choose SMS.
-  - Enter a valid phone number in international format (e.g., +1234567890).
+### **Get Those Notifications Rolling**
+Time to set up your subscriptions:
+1. Head to the SNS topic 
+2. Click "Create Subscription"
+3. Choose your poison:
+   - Email: Enter your email
+   - SMS: Drop in your phone number (international format, please!)
+4. Confirm your subscription (check that inbox or phone)
 
-4. Click Create Subscription.
-5. If you added an Email subscription:
-- Check the inbox of the provided email address.
-- Confirm the subscription by clicking the confirmation link in the email.
+### **Kick the Tires**
+Make sure everything's working:
+1. Jump into the Lambda function in AWS Console
+2. Create a test event
+3. Run the function
+4. Peek at CloudWatch Logs
+5. Verify those notifications are flying
 
-### **Test the System**
-1. Open the Lambda function in the AWS Management Console.
-2. Create a test event to simulate execution.
-3. Run the function and check CloudWatch Logs for errors.
-4. Verify that SMS notifications are sent to the subscribed users.
-
-### **What We Learned**
-1. Designing a notification system with AWS SNS and Lambda.
-2. Securing AWS services with least privilege IAM policies.
-3. Automating workflows using EventBridge.
-4. Integrating external APIs into cloud-based workflows.
-5. Automated the entier solution with Infrastructure as Code tool Terraform
+### **The Takeaways**
+By the end of this, you'll have leveled up in:
+- Building slick notification systems with AWS
+- Locking down services with rock-solid security
+- Automating workflows like a cloud ninja
+- Integrating external APIs seamlessly
+- Mastering Infrastructure as Code with Terraform
