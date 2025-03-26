@@ -1,51 +1,52 @@
-# Game Day Notifications / Sports Alerts System
 
-## **Project Overview**
-This project is an alert system that sends real-time NBA game day score notifications to subscribed users via SMS/Email. It leverages **Amazon SNS**, **AWS Lambda and Python**, **Amazon EvenBridge** and **NBA APIs** to provide sports fans with up-to-date game information. The project demonstrates how we can use Infrastructure as Code by leveraging Terraform to automate the deployement and destruction of this solution in seconds.
 
----
+# 🏀 NBA Game Day Notifications System
 
-## **Features**
-- Fetches live NBA game scores using an external API.
-- Sends formatted score updates to subscribers via SMS/Email using Amazon SNS.
-- Scheduled automation for regular updates using Amazon EventBridge.
-- Designed with security in mind, following the principle of least privilege for IAM roles.
-
-## **Prerequisites**
-- Free account with subscription and API Key at [sportsdata.io](https://sportsdata.io/)
-- Personal AWS account with basic understanding of AWS and Python
-- AWS CLI installed and configured to your personal account
-- Terraform CLI version 1.10.5 installed on your local environment 
+## **Why I Built This**
+As a die-hard NBA fan who's tired of missing crucial game moments, I created this real-time notification system to keep me and fellow basketball enthusiasts in the loop. This project combines my passion for sports with cloud architecture to deliver something I actually use every game day.
 
 ---
 
-## **Technical Architecture**
-![nba_API](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
+## **What This System Does**
+- 📊 Pulls live NBA scores from a professional sports data API
+- 📱 Delivers instant game updates via text/email (no more checking your phone every 5 minutes!)
+- ⏱️ Runs on a schedule so you never miss a crucial 4th quarter comeback
+- 🔒 Built with security-first mindset (because nobody likes their data exposed)
+- ☁️ Deploys in seconds with Terraform (because life's too short for manual setup)
 
-
----
-
-
-## **Technologies**
-- **Cloud Provider**: AWS
-- **Infrastructure as Code tool**: Terraform
-- **Core Services**: SNS, Lambda, EventBridge
-- **External API**: NBA Game API (SportsData.io)
-- **Programming Language**: Python 3.x
-- **IAM Security**:
-  - Least privilege policies for Lambda, SNS, EventBridge and Systems Manager
+## **Before You Start**
+- Free API key from [sportsdata.io](https://sportsdata.io/) (takes 2 minutes to register)
+- Your own AWS account (the free tier should cover most usage unless you're texting the entire neighborhood)
+- AWS CLI configured to your account
+- Terraform v1.10.5+ installed (it's worth learning - trust me!)
 
 ---
 
-## **Project Structure**
+## **How It All Works**
+![NBA Score Pipeline Architecture](https://github.com/user-attachments/assets/5e19635e-0685-4c07-9601-330f7d1231f9)
+
+*Simple but effective: Lambda grabs the data, formats it nicely, and SNS makes sure it reaches your phone/inbox right away*
+
+---
+
+## **Tech Stack I Chose**
+- **AWS** for reliable cloud infrastructure
+- **Terraform** because clicking through the AWS console 100 times isn't my idea of fun
+- **SNS, Lambda, EventBridge** - the perfect trio for event-driven notifications
+- **Python** for its simplicity and powerful API handling capabilities
+- **IAM Policies** configured with least privilege (because security matters)
+
+---
+
+## **Project Files**
 ```bash
 game-day-notifications_terraform/
-├── nba_notifications.py         # Main Lambda function code
-├── nba_notifications.zip        # Main Lambda function zipped file
-├── game_day_notifications.tf    # Game Day notification Terraform config file
+├── nba_notifications.py         # Where the magic happens
+├── nba_notifications.zip        # Same magic, but zipped for Lambda
+├── game_day_notifications.tf    # Infrastructure as code (never manually create resources again!)
 ├── LICENSE                     
 ├── .gitignore
-└── README.md                    # Project documentation
+└── README.md                    # You're reading it now 👀               # Project documentation
 ``` 
 
 ## **Setup Instructions**
