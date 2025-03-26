@@ -20,7 +20,7 @@ def format_game_data(game):
         return (
             f"Game Status: {status}\n"
             f"{away_team} vs {home_team}\n"
-            f"Final Score: {final_score}\n"
+            f"Final Score: {final_score}\n" 
             f"Start Time: {start_time}\n"
             f"Channel: {channel}\n"
             f"Quarter Scores: {quarter_scores}\n"

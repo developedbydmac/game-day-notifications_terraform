@@ -15,7 +15,7 @@ This project is an alert system that sends real-time NBA game day score notifica
 - Free account with subscription and API Key at [sportsdata.io](https://sportsdata.io/)
 - Personal AWS account with basic understanding of AWS and Python
 - AWS CLI installed and configured to your personal account
-- Terraform CLI version 1.10.5 installed on your local environment
+- Terraform CLI version 1.10.5 installed on your local environment 
 
 ---
 

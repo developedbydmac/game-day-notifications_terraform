@@ -26,7 +26,7 @@ resource "aws_iam_role" "lambda_role" {
   ]
 }
 EOF
-}
+} 
 
 # IAM Policy for Lambda to publish to SNS
 resource "aws_iam_policy" "sns_publish_policy" {
