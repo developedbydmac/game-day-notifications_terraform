@@ -16,6 +16,7 @@ def format_game_data(game):
     quarters = game.get("Quarters", [])
     quarter_scores = ', '.join([f"Q{q['Number']}: {q.get('AwayScore', 'N/A')}-{q.get('HomeScore', 'N/A')}" for q in quarters])
     
+    # New logic for halftime and close games
     if status == "Final":
         return (
             f"Game Status: {status}\n"
@@ -27,8 +28,19 @@ def format_game_data(game):
         )
     elif status == "InProgress":
         last_play = game.get("LastPlay", "N/A")
+        
+        # Check for halftime
+        is_halftime = game.get("IsHalftime", False)
+        halftime_status = " - HALFTIME" if is_halftime else ""
+        
+        # Check for close game (within 5 points)
+        away_score = game.get('AwayTeamScore', 0)
+        home_score = game.get('HomeTeamScore', 0)
+        score_diff = abs(away_score - home_score)
+        close_game_status = " - CLOSE GAME" if score_diff <= 5 else ""
+        
         return (
-            f"Game Status: {status}\n"
+            f"Game Status: {status}{halftime_status}{close_game_status}\n"
             f"{away_team} vs {home_team}\n"
             f"Current Score: {final_score}\n"
             f"Last Play: {last_play}\n"
@@ -48,12 +60,11 @@ def format_game_data(game):
             f"Details are unavailable at the moment.\n"
         )
 
-
+# Rest of the code remains the same as in your original script
 def get_secret():
     ssm = boto3.client("ssm", region_name="us-east-1")
     response = ssm.get_parameter(Name="nba-api-key", WithDecryption=True)
     return response["Parameter"]["Value"]
-
 
 def lambda_handler(event, context):
     # Get environment variables
